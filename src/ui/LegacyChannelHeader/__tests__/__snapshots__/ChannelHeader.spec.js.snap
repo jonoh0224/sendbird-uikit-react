@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ChannelHeader should create a snapshot of a default ChannelHeader component 1`] = `
+exports[`LegacyChannelHeader should create a snapshot of a default ChannelHeader component 1`] = `
 <div
   className="sendbird-channel-header "
 >

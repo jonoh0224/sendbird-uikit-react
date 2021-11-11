@@ -5,7 +5,7 @@ import ChannelHeader from '../index.jsx';
 
 const noop = () => { };
 
-describe('ChannelHeader', () => {
+describe('LegacyChannelHeader', () => {
   it('should create a snapshot of a default ChannelHeader component', function () {
     const component = renderer.create(
       <ChannelHeader onEdit={noop} />

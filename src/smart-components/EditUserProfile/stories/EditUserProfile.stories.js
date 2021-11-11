@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import EditUserProfile from '../index.tsx';
 import SendbirdProvider from '../../../lib/Sendbird'
 
-export default { title: 'UI Components/EditUserProfile' };
+export default { title: 'EditUserProfile' };
 
 const getUser = () => (
   {

@@ -10,8 +10,8 @@ import channelListInitialState from './dux/initialState';
 import channelListReducers from './dux/reducers';
 
 import ChannelPreview from '../../ui/ChannelPreview';
-import ChannelHeader from '../../ui/ChannelHeader';
-import EditUserProfile from '../../ui/EditUserProfile';
+import ChannelHeader from '../../ui/LegacyChannelHeader';
+import EditUserProfile from '../../ui/LegacyEditUserProfile';
 import PlaceholderTypes from '../../ui/PlaceHolder/type';
 
 import AddChannel from './components/AddChannel';
@@ -57,6 +57,7 @@ function ChannelList(props) {
   const { config = {} } = props;
   // enable if it is true atleast once(both are flase by default)
   const enableEditProfile = allowProfileEdit || config.allowProfileEdit;
+
   const userDefinedDisableUserProfile = disableUserProfile || config.disableUserProfile;
   const userDefinedRenderProfile = renderUserProfile || config.renderUserProfile;
   const { sdk = {} } = sdkStore;

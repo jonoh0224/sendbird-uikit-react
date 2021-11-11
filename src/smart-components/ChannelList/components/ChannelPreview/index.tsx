@@ -1,29 +1,36 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import SendBird from 'sendbird';
 
-import './index.scss';
+import './channel-preview.scss';
 
-import ChannelAvatar from '../ChannelAvatar/index';
-import Badge from '../Badge';
-import Icon, { IconColors, IconTypes } from '../Icon';
-import Label, { LabelTypography, LabelColors } from '../Label';
-import { LocalizationContext } from '../../lib/LocalizationContext';
+import ChannelAvatar from '../../../../ui/ChannelAvatar';
+import Badge from '../../../../ui/Badge';
+import Icon, { IconColors, IconTypes } from '../../../../ui/Icon';
+import Label, { LabelTypography, LabelColors } from '../../../../ui/Label';
 
 import * as utils from './utils';
 
-// Legacy
-export default function ChannelPreview({
+import useSendbirdStateContext from '../../../../hooks/useSendbirdStateContext';
+import { LocalizationContext } from '../../../../lib/LocalizationContext';
+
+interface ChannelPreviewInterface {
+  channel: SendBird.GroupChannel;
+  isActive?: boolean;
+  onClick: () => void;
+  renderChannelAction: (props: { channel: SendBird.GroupChannel }) => React.ReactNode;
+  tabIndex: number;
+}
+
+const ChannelPreview: React.FC<ChannelPreviewInterface> = ({
   channel,
-  currentUser,
-  isActive,
-  ChannelAction,
-  theme,
+  isActive = false,
+  renderChannelAction,
   onClick,
   tabIndex,
-}) {
-  const {
-    userId,
-  } = currentUser;
+}: ChannelPreviewInterface) => {
+  const sbState = useSendbirdStateContext();
+  const userId = sbState?.stores?.userStore?.user?.userId;
+  const theme = sbState?.config?.theme;
   const { isBroadcast, isFrozen } = channel;
   const { stringSet } = useContext(LocalizationContext);
   return (
@@ -118,34 +125,10 @@ export default function ChannelPreview({
       <div
         className="sendbird-channel-preview__action"
       >
-        {ChannelAction}
+        { renderChannelAction() }
       </div>
     </div>
   );
 }
 
-ChannelPreview.propTypes = {
-  channel: PropTypes.shape({
-    members: PropTypes.arrayOf(PropTypes.shape({})),
-    coverUrl: PropTypes.string,
-    isBroadcast: PropTypes.bool,
-    isFrozen: PropTypes.bool,
-  }),
-  currentUser: PropTypes.shape({
-    userId: PropTypes.string,
-  }),
-  isActive: PropTypes.bool,
-  ChannelAction: PropTypes.element.isRequired,
-  theme: PropTypes.string,
-  onClick: PropTypes.func,
-  tabIndex: PropTypes.number,
-};
-
-ChannelPreview.defaultProps = {
-  channel: {},
-  currentUser: {},
-  isActive: false,
-  theme: 'light',
-  onClick: () => { },
-  tabIndex: 0,
-};
+export default ChannelPreview;

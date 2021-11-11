@@ -28,7 +28,18 @@ export function useSendbirdStateContext(): SendBirdState;
 export type SendBirdState = {
   config: SendBirdStateConfig;
   stores: SendBirdStateStore;
+  dispatchers: {
+    userDispatcher: UserDispatcher,
+  },
 }
+
+type UserDispatcherParams = {
+  type: string,
+  payload: Sendbird.User
+};
+
+type UserDispatcher = (params: UserDispatcherParams) => void;
+
 export namespace SendBirdSelectors {
   type GetSdk = Sendbird.SendBirdInstance | undefined;
   type GetConnect = (
@@ -187,6 +198,8 @@ interface SendBirdStateConfig {
   appId: string;
   accessToken: string;
   theme: string;
+  pubSub: any;
+  logger: Logger;
   setCurrenttheme: (theme: string) => void;
   userListQuery?(): UserListQuery;
   imageCompression?: {
@@ -361,6 +374,7 @@ interface ChannelListProps {
   onThemeChange?(theme: string): void;
   onProfileEditSuccess?(user: Sendbird.User): void;
   onChannelSelect?(channel: Sendbird.GroupChannel): void;
+  sortChannelList?: (channels: Sendbird.GroupChannel[]) => Sendbird.GroupChannel[];
   renderChannelPreview?: (props: RenderChannelPreviewProps) => React.ReactNode;
   renderUserProfile?: (props: RenderUserProfileProps) => React.ReactNode;
   renderHeader?: (props: void) => React.ReactNode;

@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import Sendbird from '../../lib/Sendbird';
 
-import ChannelList from '../ChannelList';
+import ChannelList from '../LegacyChannelList';
 import Conversation from '../Conversation';
 import ChannelSettings from '../ChannelSettings';
 import MessageSearchPannel from '../MessageSearch/messageSearchPannel';
