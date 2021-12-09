@@ -4,7 +4,7 @@ import {
   Channel as SBConversation,
   ChannelList as SBChannelList,
   ChannelSettings as SBChannelSettings,
-  withSendBird
+  withSendBird,
 } from "sendbird-uikit";
 
 function CustomizedApp(props) {
@@ -19,8 +19,8 @@ function CustomizedApp(props) {
       theme,
       userListQuery,
       logger,
-      pubSub
-    }
+      pubSub,
+    },
   } = props;
   const logDefaultProps = useCallback(() => {
     console.log(
@@ -62,7 +62,7 @@ function CustomizedApp(props) {
     theme,
     userListQuery,
     logger,
-    pubSub
+    pubSub,
   ]);
   logDefaultProps();
 
@@ -90,17 +90,17 @@ function CustomizedApp(props) {
             }}
           />
         </div>
+        {showSettings && (
+          <div className="sendbird-app__settingspanel-wrap">
+            <SBChannelSettings
+              channelUrl={currentChannelUrl}
+              onCloseClick={() => {
+                setShowSettings(false);
+              }}
+            />
+          </div>
+        )}
       </div>
-      {showSettings && (
-        <div className="sendbird-app__settingspanel-wrap">
-          <SBChannelSettings
-            channelUrl={currentChannelUrl}
-            onCloseClick={() => {
-              setShowSettings(false);
-            }}
-          />
-        </div>
-      )}
     </div>
   );
 }
